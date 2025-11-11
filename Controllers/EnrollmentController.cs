@@ -36,6 +36,7 @@ namespace TutorsCollageProject.Controllers
         {
             return await _enrollmentService.GetAll();
         }
+
         [HttpGet("GetByIdEnrollment/{Id}")]
         public async Task<ActionResult<Enrollment>> GetSingle(int Id)
         {
@@ -50,6 +51,7 @@ namespace TutorsCollageProject.Controllers
                 return NotFound(new { message = ex.Message });
             }
         }
+
         [HttpPost("AddEnrollment")]
         public async Task<ActionResult<Enrollment>> PostEnrollment([FromBody] Enrollment enrollment)
         {
