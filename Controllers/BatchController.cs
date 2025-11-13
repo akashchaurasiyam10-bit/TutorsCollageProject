@@ -15,7 +15,7 @@ namespace TutorsCollageProject.Controllers
         {
             _batchService = batchService;
         }
-
+        #region Display one And All
         [HttpGet("DisplayAllBatch")]
         public async Task<ActionResult<List<Batch>>> GetAll()
         {
@@ -35,6 +35,9 @@ namespace TutorsCollageProject.Controllers
                 return NotFound(new { message = ex.Message });
             }
         }
+        #endregion
+
+        #region Add Data
         [HttpPost("AddBatchRecords")]
         public async Task<ActionResult<Batch>> PostBatch([FromBody] Batch batch)
         {
@@ -46,6 +49,9 @@ namespace TutorsCollageProject.Controllers
                 BatchId = batch.BatchId
             });
         }
+        #endregion
+
+        #region Edit & update Data
         [HttpPut("UpdateBatchRecords")]
         public async Task<ActionResult<Batch>> PutBatch(int id,[FromBody]  Batch batch)
         {
@@ -68,6 +74,9 @@ namespace TutorsCollageProject.Controllers
                 return NotFound(new { message = ex.Message });
             }
         }
+        #endregion
+
+        #region Delete 
         [HttpDelete("DeleteBatchRecords/{id}")]
         public async Task<ActionResult<Batch>>  DeleteBatch(int id)
         {
@@ -90,5 +99,24 @@ namespace TutorsCollageProject.Controllers
                 });
             }
         }
+        #endregion
+
+        #region Student DropDown List
+        [HttpGet("dropdown/students")]
+        public async Task<ActionResult<List<object>>> GetStudentDropdown()
+        {
+            var students = await _batchService.StudentDropDown();
+            return Ok(students);
+        }
+        #endregion
+
+        #region tutor DropDown List
+        [HttpGet("dropdown/tutors")]
+        public async Task<ActionResult<List<object>>> GetTutorDropDown()
+        {
+            var tutors = await _batchService.TutorDropDown();
+            return Ok(tutors);
+        }
+        #endregion
     }
 }
